@@ -12,5 +12,6 @@ laravel 8 CRUD and eloquent relationships
 8. php artisan serve
 
 ### tests
-http://localhost:8000/phrases
+http://localhost:8000/phrases      
+
 http://localhost:8000/authors
