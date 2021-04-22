@@ -16,5 +16,8 @@ class Author extends Model
 
 	public function phrases() {
            return $this->hasMany(Phrase::class);
-        }
+    }
+    public function categorias()        {
+          return $this->belongsToMany(Category::class,'phrases');
+    }
 }
