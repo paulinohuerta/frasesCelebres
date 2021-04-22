@@ -57,3 +57,55 @@ foreach($ArCateg as $cat) {
   echo "\n";
 }
 ```
+> Categories of phrases associated with the author of id =  4.
+
+```php
+foreach(Author::find(4)->categorias->groupBy('id') as $k => $v) {
+   echo '(',$k,')',Category::find($k)->descri,"\n";
+} 
+```
+Output:
+
+    (4)destino
+    (6)perseverancia
+    (9)bondad
+
+> Categories of phrases associated with each author
+```php
+$AllAuthors = Author::all();
+foreach($AllAuthors as $a) {
+  echo '\\\\\\', $a->name, '////',"\n";
+  foreach($a->categorias->groupBy('id') as $k => $v) {
+    echo '(',$k,')',Category::find($k)->descri,"\n";
+  }
+  echo "\n\n";
+}
+```
+
+> Authors associated with a specific category, we take the category of id = 4.
+
+```php
+foreach(Phrase::where('category_id',4)->get() as $p) {
+  echo $p->author()->get()->first()->name,"\n";
+}
+```
+Output:
+
+    Albert Einstein
+    Albert Einstein
+    Napoleón Bonaparte
+    Ludwig van Beethoven
+    Ludwig van Beethoven
+
+> The same, using the "authors" method of the Author Model, we add groupBy to obtain the different values.
+
+```php
+foreach(Category::find(4)->authors->groupBy('id') as $k => $v) {
+   echo Author::find($k)->name,"\n";
+}
+```
+Output:
+
+    Albert Einstein
+    Ludwig van Beethoven
+    Napoleón Bonaparte
